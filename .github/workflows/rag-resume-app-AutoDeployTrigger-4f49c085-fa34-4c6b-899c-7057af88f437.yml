@@ -20,22 +20,22 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          # These secrets were auto-created by Azure, leave them as is
           client-id: ${{ secrets.RAGRESUMEAPP_AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.RAGRESUMEAPP_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.RAGRESUMEAPP_AZURE_SUBSCRIPTION_ID }}
 
       - name: Build and push container image to registry
-        uses: azure/container-apps-build-and-deploy@v1.1.8
+        # CHANGED: Using @v1 for stability
+        uses: azure/container-apps-build-and-deploy@v1
         with:
           appSourcePath: ${{ github.workspace }} 
           
-          # These are the 3 secrets you just manually created
+          # Your Manual Secrets
           registryUrl: ${{ secrets.AZURE_CONTAINER_REGISTRY_ENDPOINT }}
           registryUsername: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
           
-          # App details
+          # App Details
           containerAppName: rag-resume-app
           resourceGroup: rag-demo-rg
           imageToBuild: rag-resume-app:${{ github.sha }}
