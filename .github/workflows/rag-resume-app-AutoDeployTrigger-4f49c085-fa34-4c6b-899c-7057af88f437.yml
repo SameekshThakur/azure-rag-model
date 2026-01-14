@@ -25,12 +25,12 @@ jobs:
           subscription-id: ${{ secrets.RAGRESUMEAPP_AZURE_SUBSCRIPTION_ID }}
 
       - name: Build and push container image to registry
-        # CHANGED: Using @v1 for stability
-        uses: azure/container-apps-build-and-deploy@v1
+        # REVERTED to the specific version we know works
+        uses: azure/container-apps-build-and-deploy@v1.1.8
         with:
           appSourcePath: ${{ github.workspace }} 
           
-          # Your Manual Secrets
+          # Secrets
           registryUrl: ${{ secrets.AZURE_CONTAINER_REGISTRY_ENDPOINT }}
           registryUsername: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
