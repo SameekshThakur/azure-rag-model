@@ -20,4 +20,5 @@ EXPOSE 8000
 
 # Command to run the app
 # -h 0.0.0.0 is crucial for Docker to listen on external interfaces
-CMD ["chainlit", "run", "app.py", "-h", "0.0.0.0", "-p", "8000"]
+
+CMD ["chainlit", "run", "app.py", "--host", "0.0.0.0", "--port", "8000"]
